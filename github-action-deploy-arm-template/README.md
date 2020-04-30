@@ -16,20 +16,33 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
 
 ### Required Inputs
-* `creds` **Required** Paste output of `az ad sp create-for-rbac -o json` as value of secret variable: `AZURE_CREDENTIALS`  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/serviceprincipal.json))
+* `creds` **Required**   
+    [Create Service Principal for Authentication](#Create-Service-Principal-for-Authentication)    
 
-* `resourceGroupName` **Required** Provide the name of a resource group.
+* `resourceGroupName` **Required**   
+    Provide the name of a resource group.
 
-* `templateLocation` **Required** Specify the path to the Azure Resource Manager template.  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/template.json))
+* `templateLocation` **Required**  
+    Specify the path to the Azure Resource Manager template.  
+(See [assets/json/template.json](assets/json/template.json))
 
-* `deploymentMode` Incremental (only add resources to resource group) or Complete (remove extra resources from resource group). Default: `Incremental`.
+* `deploymentMode`   
+    Incremental (only add resources to resource group) or Complete (remove extra resources from resource group). Default: `Incremental`.
   
-* `deploymentName` Specifies the name of the resource group deployment to create.
+* `deploymentName`  
+    Specifies the name of the resource group deployment to create.
 
-* `parameters` Specify the path to the Azure Resource Manager parameters file.  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/parameters.json))
+* `parametersLocation`   
+    Specify the path to the Azure Resource Manager parameters file.  
+    (See [assets/json/serviceprincipal.json](assets/json/parameters.json))
+
+#### Create service principal for Authentication
+In order the action can authenticate to Azure you need to create a new or use an existing service principal. You can easily create an serviceprincipal using the [azure cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).   
+Just run `az ad sp create-for-rbac -o json` and save the output of the command, navigate then to `Settings -> Secrets` and add the json output as value, as shown below.   
+![Create AZURE_CREDENTIALS Secret](assets/images/secret_create_azure_credentials.png)   
+[assets/json/serviceprincipal.json](assets/json/serviceprincipal.json)   
+
+If you are using an existing service principal just write the json yourself.
 
 ### Usage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.   
@@ -41,7 +54,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
     resourceGroupName: <YourResourceGroup>
     templateLocation: <path/to/azuredeploy.json>
 ```
-File: [usage.yaml](assets/usage.yaml)
+File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)
 
 ### Example Workflow
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.  
@@ -62,7 +75,7 @@ jobs:
         templateLocation: ./github-action-deploy-arm-template/template.json
         parameters: ./github-action-deploy-arm-template/parameters.json
 ```
-File: [example.yaml](assets/example.yaml)
+File: [assets/yaml/example.yaml](assets/yaml/example.yaml)
 
 ## Where is the source code of this Action?
 The source of this action can be found in our whiteducksoftware github organization.   
