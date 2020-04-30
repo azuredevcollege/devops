@@ -9,7 +9,10 @@ With GitHub Actions you can build end-to-end continuous integration (CI) and con
 
 Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions
 
-## How to use this Action
+## What is the whiteducksoftware/azure-arm-action Action?
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
+
+## How to use this Action?
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
 
 ### Required Inputs
@@ -28,7 +31,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
 * `parameters` Specify the path to the Azure Resource Manager parameters file.  
 (See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/parameters.json))
 
-## Usage
+### Usage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.   
 
 ```yaml
@@ -60,3 +63,7 @@ jobs:
         parameters: ./github-action-deploy-arm-template/parameters.json
 ```
 File: [example.yaml](assets/example.yaml)
+
+## Where is the source code of this Action?
+The source of this action can be found in our whiteducksoftware github organization.   
+Here: https://github.com/whiteducksoftware/azure-arm-action
