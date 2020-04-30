@@ -29,7 +29,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
 (See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/parameters.json))
 
 ## Usage
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.   
+File: [usage.yaml](assets/usage.yaml)
 ```yaml
 - uses: whiteducksoftware/azure-arm-action@v1
   with:
@@ -39,7 +40,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
 ```
 
 ### Example Workflow
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.  
+
+File: [example.yaml](assets/example.yaml)
 ```yaml
 on: [push]
 name: AzureLoginSample
