@@ -14,19 +14,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scele
 
 ### Required Inputs
 * `creds` **Required** Paste output of `az ad sp create-for-rbac -o json` as value of secret variable: `AZURE_CREDENTIALS`  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](https://github.com/whiteducksoftware/devops/blob/master/github-action-deploy-arm-template/assets/serviceprincipal.json))
+(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/serviceprincipal.json))
 
 * `resourceGroupName` **Required** Provide the name of a resource group.
 
 * `templateLocation` **Required** Specify the path to the Azure Resource Manager template.  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](https://github.com/whiteducksoftware/devops/blob/master/github-action-deploy-arm-template/assets/template.json))
+(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/template.json))
 
 * `deploymentMode` Incremental (only add resources to resource group) or Complete (remove extra resources from resource group). Default: `Incremental`.
   
 * `deploymentName` Specifies the name of the resource group deployment to create.
 
 * `parameters` Specify the path to the Azure Resource Manager parameters file.  
-(See [github-action-deploy-arm-template/assets/serviceprincipal.json](https://github.com/whiteducksoftware/devops/blob/master/github-action-deploy-arm-template/assets/parameters.json))
+(See [github-action-deploy-arm-template/assets/serviceprincipal.json](assets/parameters.json))
 
 ## Usage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
