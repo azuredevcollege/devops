@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/infrastructure.yml"
+      - "github-action-deploy-arm-template/assets/json/template.json"
+      - "github-action-deploy-arm-template/assets/json/parameters.json"
+
+name: Infrastructure
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Sourcecode
+        uses: actions/checkout@master
+
+      - name: Deploy ARM Template
+        uses: whiteducksoftware/azure-arm-action@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            resourceGroupName: <YourResourceGroup>
+            templateLocation: github-action-deploy-arm-template/assets/json/template.json
+            parametersLocation: github-action-deploy-arm-template/assets/json/parameters.json

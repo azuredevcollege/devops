@@ -13,7 +13,51 @@ Source: https://help.github.com/en/actions/getting-started-with-github-actions/a
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
 
 ## How to use this Action?
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
+We start by fetching the credentials this workflow requires for authenticating with Azure, see [Create Service Principal for Authentication](#Create-Service-Principal-for-Authentication). After that we need to define a step so our task has access to the local repo and its file, this can be achieved by using a task which GitHub itself provides us: [actions/checkout](https://github.com/actions/checkout). Our workflow file currently should look like this:
+```yaml
+- name: Checkout Sourcecode
+  uses: actions/checkout@master
+```
+Now we need to add our [whiteducksoftware/azure-arm-action](https://github.com/whiteducksoftware/azure-arm-action) task to finally deploy our ARM Template:
+```yaml
+- uses: whiteducksoftware/azure-arm-action@v1
+  with:
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
+    resourceGroupName: <YourResourceGroup>
+    templateLocation: <path/to/azuredeploy.json>
+```
+File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)   
+For more Information on how to configure the parameters see [Required Inputs](#Required-Inputs).
+
+If we combine the the two task and bring them into the required format, the final workflow should look like this:
+```yaml
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "github-action-deploy-arm-template/assets/yaml/workflows/example.yaml"
+      - "github-action-deploy-arm-template/assets/json/template.json"
+      - "github-action-deploy-arm-template/assets/json/parameters.json"
+
+name: Infrastructure
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Sourcecode
+        uses: actions/checkout@master
+
+      - name: Deploy ARM Template
+        uses: whiteducksoftware/azure-arm-action@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            resourceGroupName: <YourResourceGroup>
+            templateLocation: github-action-deploy-arm-template/assets/json/template.json
+            parametersLocation: github-action-deploy-arm-template/assets/json/parameters.json
+```
+File: [assets/yaml/workflows/example.yaml](assets/yaml/workflows/example.yaml)
 
 ### Required Inputs
 * `creds` **Required**   
@@ -43,39 +87,6 @@ Just run `az ad sp create-for-rbac -o json` and save the output of the command, 
 [assets/json/serviceprincipal.json](assets/json/serviceprincipal.json)   
 
 If you are using an existing service principal just write the json yourself.
-
-### Usage
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.   
-
-```yaml
-- uses: whiteducksoftware/azure-arm-action@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-    resourceGroupName: <YourResourceGroup>
-    templateLocation: <path/to/azuredeploy.json>
-```
-File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)
-
-### Example Workflow
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.  
-
-```yaml
-on: [push]
-name: AzureLoginSample
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - uses: whiteducksoftware/azure-arm-action@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        resourceGroupName: github-action-arm-rg
-        templateLocation: ./github-action-deploy-arm-template/template.json
-        parameters: ./github-action-deploy-arm-template/parameters.json
-```
-File: [assets/yaml/example.yaml](assets/yaml/example.yaml)
 
 ## Where is the source code of this Action?
 The source of this action can be found in our whiteducksoftware github organization.   
