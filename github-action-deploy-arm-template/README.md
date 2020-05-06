@@ -10,10 +10,10 @@ With GitHub Actions you can build end-to-end continuous integration (CI) and con
 Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions
 
 ## What is the whiteducksoftware/azure-arm-action Action?
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem urna, scelerisque at ultrices vel, semper vel mi. Aenean sagittis sagittis lectus, vitae commodo velit pharetra id. Maecenas sit amet viverra enim. Curabitur fermentum mi mollis augue hendrerit, vel efficitur dolor finibus. Maecenas ornare nunc sed lacus consequat, quis luctus elit tristique. Sed convallis sapien eget ex aliquet volutpat. Phasellus ante elit, accumsan eget lorem sit amet, tristique iaculis dui. Maecenas dignissim turpis velit, et eleifend purus dignissim ut.
+This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in Go, automatically build to a very small docker image and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
 
 ## How to use this Action?
-We start by fetching the credentials this workflow requires for authenticating with Azure, see [Create Service Principal for Authentication](#Create-Service-Principal-for-Authentication). After that we need to define a step so our task has access to the local repo and its file, this can be achieved by using a task which GitHub itself provides us: [actions/checkout](https://github.com/actions/checkout). Our workflow file currently should look like this:
+We start by fetching the credentials this workflow requires for authenticating with Azure, see [Create Service Principal for Authentication](#Create-Service-Principal-for-Authentication). After that we need to define a step so our task has access to the local repo and its files, this can be achieved by using a task which GitHub itself provides us: [actions/checkout](https://github.com/actions/checkout). Our workflow file currently should look like this:
 ```yaml
 - name: Checkout Sourcecode
   uses: actions/checkout@master
