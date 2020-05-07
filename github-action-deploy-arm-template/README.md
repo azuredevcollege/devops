@@ -7,10 +7,10 @@ GitHub Actions help you automate your software development workflows in the same
 
 With GitHub Actions you can build end-to-end continuous integration (CI) and continuous deployment (CD) capabilities directly in your repository.
 
-Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions
+*Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions*
 
 ## What is the whiteducksoftware/azure-arm-action Action?
-This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in Go, automatically build to a very small docker image and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
+This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~2.6 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
 
 We also have previously build a [JavaScript/Node.js version](https://github.com/whiteducksoftware/azure-arm-action-js) of this Action but decided to completely rebuild this Action in Go.   
 Reasons for this rebuild among other where the following:
@@ -33,7 +33,7 @@ Now we need to add our [whiteducksoftware/azure-arm-action](https://github.com/w
     resourceGroupName: <YourResourceGroup>
     templateLocation: <path/to/azuredeploy.json>
 ```
-File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)   
+*File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)*   
 For more Information on how to configure the parameters see [Required Inputs](#Required-Inputs).
 
 If we combine the the two task and bring them into the required format, the final workflow should look like this:
@@ -64,7 +64,7 @@ jobs:
             templateLocation: github-action-deploy-arm-template/assets/json/template.json
             parametersLocation: github-action-deploy-arm-template/assets/json/parameters.json
 ```
-File: [assets/yaml/workflows/example.yaml](assets/yaml/workflows/example.yaml)
+*File: [assets/yaml/workflows/example.yaml](assets/yaml/workflows/example.yaml)*
 
 ### Required Inputs
 * `creds` **Required**   
@@ -96,5 +96,5 @@ Just run `az ad sp create-for-rbac -o json` and save the output of the command, 
 If you are using an existing service principal just write the json yourself.
 
 ## Where is the source code of this Action?
-The source of this action can be found in our whiteducksoftware github organization.   
+The source of this action can be found in our white duck Software GitHub Organization.   
 Here: https://github.com/whiteducksoftware/azure-arm-action
