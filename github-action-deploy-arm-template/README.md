@@ -89,7 +89,7 @@ jobs:
 
 #### Create service principal for Authentication
 In order the action can authenticate to Azure you need to create a new or use an existing service principal. You can easily create an serviceprincipal using the [azure cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).   
-Just run `az ad sp create-for-rbac -o json` and save the output of the command, navigate then to `Settings -> Secrets` and add the json output as value, as shown below.   
+Just run `az ad sp create-for-rbac --sdk-auth` and save the output of the command, navigate then to `Settings -> Secrets` and add the json output as value, as shown below.   
 ![Create AZURE_CREDENTIALS Secret](assets/images/secret_create_azure_credentials.png)   
 [assets/json/serviceprincipal.json](assets/json/serviceprincipal.json)   
 
