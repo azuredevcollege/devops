@@ -10,7 +10,7 @@ With GitHub Actions you can build end-to-end continuous integration (CI) and con
 *Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions*
 
 ## What is the whiteducksoftware/azure-arm-action Action?
-This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~2.6 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
+This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~7 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
 
 We also have previously build a [JavaScript/Node.js version](https://github.com/whiteducksoftware/azure-arm-action-js) of this Action but decided to completely rebuild this Action in Go.   
 Reasons for this rebuild among other where the following:
@@ -27,11 +27,12 @@ We start by fetching the credentials this workflow requires for authenticating w
 ```
 Now we need to add our [whiteducksoftware/azure-arm-action](https://github.com/whiteducksoftware/azure-arm-action) task to finally deploy our ARM Template:
 ```yaml
-- uses: whiteducksoftware/azure-arm-action@v1
+- uses: whiteducksoftware/azure-arm-action@v2.2
   with:
     creds: ${{ secrets.AZURE_CREDENTIALS }}
     resourceGroupName: <YourResourceGroup>
     templateLocation: <path/to/azuredeploy.json>
+    deploymentName: github-test
 ```
 *File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)*   
 For more Information on how to configure the parameters see [Required Inputs](#Required-Inputs).
@@ -57,12 +58,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Deploy ARM Template
-        uses: whiteducksoftware/azure-arm-action@v1
+        uses: whiteducksoftware/azure-arm-action@v2.2
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
             resourceGroupName: <YourResourceGroup>
             templateLocation: github-action-deploy-arm-template/assets/json/template.json
             parametersLocation: github-action-deploy-arm-template/assets/json/parameters.json
+            deploymentName: github-test
 ```
 *File: [assets/yaml/workflows/example.yaml](assets/yaml/workflows/example.yaml)*
 
@@ -80,7 +82,7 @@ jobs:
 * `deploymentMode`   
     Incremental (only add resources to resource group) or Complete (remove extra resources from resource group). Default: `Incremental`.
   
-* `deploymentName`  
+* `deploymentName` **Required** 
     Specifies the name of the resource group deployment to create.
 
 * `parametersLocation`   

@@ -1,5 +1,6 @@
-- uses: whiteducksoftware/azure-arm-action@v1
+- uses: whiteducksoftware/azure-arm-action@v2.2
   with:
     creds: ${{ secrets.AZURE_CREDENTIALS }}
     resourceGroupName: <YourResourceGroup>
     templateLocation: <path/to/azuredeploy.json>
+    deploymentName: github-test
