@@ -10,7 +10,7 @@ With GitHub Actions you can build end-to-end continuous integration (CI) and con
 *Source: https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions#about-github-actions*
 
 ## What is the whiteducksoftware/azure-arm-action Action?
-This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~2.6 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
+This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~7 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
 
 We also have previously build a [JavaScript/Node.js version](https://github.com/whiteducksoftware/azure-arm-action-js) of this Action but decided to completely rebuild this Action in Go.   
 Reasons for this rebuild among other where the following:
@@ -27,11 +27,12 @@ We start by fetching the credentials this workflow requires for authenticating w
 ```
 Now we need to add our [whiteducksoftware/azure-arm-action](https://github.com/whiteducksoftware/azure-arm-action) task to finally deploy our ARM Template:
 ```yaml
-- uses: whiteducksoftware/azure-arm-action@v1
+- uses: whiteducksoftware/azure-arm-action@v2.2
   with:
     creds: ${{ secrets.AZURE_CREDENTIALS }}
     resourceGroupName: <YourResourceGroup>
     templateLocation: <path/to/azuredeploy.json>
+    deploymentName: github-test
 ```
 *File: [assets/yaml/usage.yaml](assets/yaml/usage.yaml)*   
 For more Information on how to configure the parameters see [Required Inputs](#Required-Inputs).
@@ -57,12 +58,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Deploy ARM Template
-        uses: whiteducksoftware/azure-arm-action@v1
+        uses: whiteducksoftware/azure-arm-action@v2.2
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
             resourceGroupName: <YourResourceGroup>
             templateLocation: github-action-deploy-arm-template/assets/json/template.json
             parametersLocation: github-action-deploy-arm-template/assets/json/parameters.json
+            deploymentName: github-test
 ```
 *File: [assets/yaml/workflows/example.yaml](assets/yaml/workflows/example.yaml)*
 
@@ -77,11 +79,12 @@ jobs:
     Specify the path to the Azure Resource Manager template.  
 (See [assets/json/template.json](assets/json/template.json))
 
-* `deploymentMode`   
-    Incremental (only add resources to resource group) or Complete (remove extra resources from resource group). Default: `Incremental`.
-  
-* `deploymentName`  
+* `deploymentName` **Required**  
     Specifies the name of the resource group deployment to create.
+
+* `deploymentMode`   
+    Incremental (only add resources to resource group) or Complete (remove extra resources from resource group).  
+    Default: `Incremental`.
 
 * `parametersLocation`   
     Specify the path to the Azure Resource Manager parameters file.  
@@ -89,7 +92,7 @@ jobs:
 
 #### Create service principal for Authentication
 In order the action can authenticate to Azure you need to create a new or use an existing service principal. You can easily create an serviceprincipal using the [azure cli](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).   
-Just run `az ad sp create-for-rbac -o json` and save the output of the command, navigate then to `Settings -> Secrets` and add the json output as value, as shown below.   
+Just run `az ad sp create-for-rbac --sdk-auth` and save the output of the command, navigate then to `Settings -> Secrets` and add the json output as value, as shown below.   
 ![Create AZURE_CREDENTIALS Secret](assets/images/secret_create_azure_credentials.png)   
 [assets/json/serviceprincipal.json](assets/json/serviceprincipal.json)   
 
