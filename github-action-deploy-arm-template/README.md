@@ -12,12 +12,7 @@ With GitHub Actions you can build end-to-end continuous integration (CI) and con
 ## What is the whiteducksoftware/azure-arm-action Action?
 This actions helps us on deploying ARM templates to Azure, so we don't need fiddle around with the Azure CLI in our GitHub workflow. This action is written in **Go**, automatically build to a very small docker image (currently ~7 MB) and deployed to Docker Hub ([whiteduck/azure-arm-action on Docker Hub](https://hub.docker.com/repository/docker/whiteduck/azure-arm-action)). 
 
-We also have previously build a [JavaScript/Node.js version](https://github.com/whiteducksoftware/azure-arm-action-js) of this Action but decided to completely rebuild this Action in Go.   
-Reasons for this rebuild among other where the following:
-- Go is measurable **faster** than Node.js 
-- Running in a Docker container which provides a 
-**reliable** and controlable environment
-- Go is a **rising language** in the Cloud native and DevOps world and gains more and more in popularity
+There also exists a previous version of our Action based on Node.js, which can be found [here](https://github.com/whiteducksoftware/azure-arm-action-js). The Node.js version has the advantage that it is very small as only a single JavaScript file needs to be downloaded. The execution time is pretty good as the GitHub runner caches the dependencies and node modules. The Go version has the advantage, when running on a self hosted runner, you only need to install Docker on that runner and don't need to worry about other dependencies or packages. An additional advantage of the Go version is that the container provides a reliable and consistent environment, which is not garuanteed with Node.js based version.
 
 ## How to use this Action?
 We start by fetching the credentials this workflow requires for authenticating with Azure, see [Create Service Principal for Authentication](#Create-Service-Principal-for-Authentication). After that we need to define a step so our task has access to the local repo and its files, this can be achieved by using a task which GitHub itself provides us: [actions/checkout](https://github.com/actions/checkout). Our workflow file currently should look like this:
